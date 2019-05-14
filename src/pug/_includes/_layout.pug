@@ -1,0 +1,19 @@
+block variables
+	- var pageLang　= "ja";
+	- var pageTitle　= "Pug Template";
+	- var pageDescription　= "ダミーのディスクリプション";
+	- var pageKeywords　= "キーワード1, キーワード2, キーワード3";
+	- var pageOgpImage　= "http://test.co.jp/ogp.png";
+
+doctype html
+html(lang=pageLang)
+	head
+		include ./_meta
+
+	body(id=pageId)
+		include ./_header
+
+		block content
+
+		include ./_footer
+		include ./_script
