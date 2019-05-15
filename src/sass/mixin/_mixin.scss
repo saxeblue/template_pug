@@ -109,6 +109,8 @@
 
 /**
  * VWでfont-sizeを設定する
+ * 参考: https://css-tricks.com/snippets/sass/viewport-sized-typography-minimum-maximum-sizes/
+ *
  * @include vwFont(24, 14);
  * @include vwFont($px:24, $minpx:14, $fw:bold);
  */
