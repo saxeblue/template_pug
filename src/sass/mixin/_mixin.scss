@@ -1,9 +1,13 @@
 @charset "utf-8";
 
 
+
+/*-------------------------------------------------------------------*/
+/* [Responsive Mixin] */
+
 /**
  * メディアクエリ
- * $breakpoint: tablet or pcS or pcL (conf/_setting.scss)
+ * $breakpoint: $pc (conf/_setting.scss)
  * 
  * #wrapper{
  *  @include mq($tablet){CSS設定}
@@ -16,6 +20,12 @@
     }
 }
 
+
+
+
+
+/*-------------------------------------------------------------------*/
+/* [BEM Mixin] */
 
 /**
  * BEM Elements
@@ -49,18 +59,100 @@
 }
 
 
+
+
+
+/*-------------------------------------------------------------------*/
+/* [Calc Mixin] */
+
 /**
- * Flexで横並びにする
+ * パーセントを計算する
+ * width: getPer(800, 1200);
  */
-@mixin fxLine($horizon:left){
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $horizon;
+@function getPer($bunshi, $bunbo){
+    @return ($bunshi / $bunbo) * 100%;
+}
+
+
+/**
+ * pxをvwに変換
+ */
+@function PxToVw($size, $viewport){
+    $rate: 100 / $viewport;
+    @return $rate * $size * 1vw;
+}
+
+
+
+
+
+/*-------------------------------------------------------------------*/
+/* [Font Mixin] */
+
+/**
+ * REMでfont-sizeを設定する
+ * @include remFont(16);
+ * @include remFont($size:16, $fw:bold);
+ */
+@mixin remFont($size, $lh:null, $fw:null){
+    font-size: #{$size}px;
+    font-size: ($size / 16) * 1rem;
+
+    @if $lh != null{
+        line-height: $lh;
+    }
+    @if $fw != null{
+        font-weight: $fw;
+    }
+}
+
+
+/**
+ * VWでfont-sizeを設定する
+ * @include vwFont(24, 14);
+ * @include vwFont($px:24, $minpx:14, $fw:bold);
+ */
+@mixin vwFont($px, $minpx, $viewport:750, $lh:null, $fw:null){
+    $vw: PxToVw($px, $viewport);
+    $vw-unitless: $vw / ($vw - $vw + 1);
+    $min-breakpoint: $minpx / $vw-unitless * 100;
+    
+    font-size: $vw;
+
+    @media (max-width: #{$min-breakpoint}px){
+        font-size: #{$minpx}px;
+    } 
+
+    @if $lh != null{
+        line-height: $lh;
+    }
+    @if $fw != null{
+        font-weight: $fw;
+    }
+}
+
+
+
+
+
+/*-------------------------------------------------------------------*/
+/* [Layout Mixin] */
+
+/**
+ * 縦横比を保持するボックスを作成する
+ * @include ratioBox(640, 360)
+ */
+@mixin ratioBox($width, $height){
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-top: getPer($height, $width);
 }
 
 
 /**
  * inline-blockで横並びにする
+ * @include ibLine;
  */
 @mixin ibLine($horizon:left){
     letter-spacing: -0.4em;
@@ -74,7 +166,20 @@
 
 
 /**
+ * Flexで横並びにする
+ * @include fxLine;
+ * justify-content: https://developer.mozilla.org/ja/docs/Web/CSS/justify-content
+ */
+@mixin fxLine($horizon:left){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $horizon;
+}
+
+
+/**
  * Flexで縦横中央揃え
+ * @include fxCenter;
  */
 @mixin fxCenter(){
     display: flex;
@@ -84,127 +189,8 @@
 
 
 /**
- * ブロックのパーセント幅を設定
- * @include perWidth(350, 750)
- */
-@mixin perWidth($self, $owner){
-    width: ($self / $owner) * 100%;
-}
-
-
-/**
- * pxをvwに変換
- */
-@function PxToVw($size, $viewport){
-    $rate: 100 / $viewport;
-    @return $rate * $size * 1vw;
-}
-
-
-/**
- * REM FONT
- */
-@mixin remFont($size, $lh:1.5, $fw:normal, $color:$font-baseColor){
-	font-size:$size + px;
-	font-size: ($size / 16) * 1rem;
-    line-height: $lh;
-    font-weight: $fw;
-    color: $color;
-}
-
-
-/**
- * Viewport sized typography with minimum and maximum values
- * @author Eduardo Boucas (@eduardoboucas)
- * @param {Number}   $responsive  - Viewport-based size
- * @param {Number}   $min         - Minimum font size (px)
- * @param {Number}   $max         - Maximum font size (px)(optional)
- * @param {Number}   $fallback    - Fallback for viewport-based units (optional)
- * 
- * @example scss - 5vw font size (with 50px fallback), minumum of 35px and maximum of 150px
- * @include vwFont(5vw, 35px, 150px, 50px);
- */
-@mixin vwFont($responsive, $min, $max:false, $fallback:false){
-    $responsive-unitless: $responsive / ($responsive - $responsive + 1);
-    $dimension: if(unit($responsive) == 'vh', 'height', 'width');
-    $min-breakpoint: $min / $responsive-unitless * 100;
-
-    @media (max-#{$dimension}: #{$min-breakpoint}) {
-        font-size: $min;
-    }
-
-    @if $max {
-        $max-breakpoint: $max / $responsive-unitless * 100;
-
-        @media (min-#{$dimension}: #{$max-breakpoint}) {
-            font-size: $max;
-        }
-    }
-
-    @if $fallback {
-        font-size: $fallback;
-    }
-
-    font-size: $responsive;
-}
-
-
-/**
- * 擬似要素を作成する
- * @include after(){ 追加するCSS }
- */
-@mixin after($content:'', $display:block, $position:absolute){
-
-    &::after{
-        content: $content;
-        display: $display;
-        position: $position;
-        @content;
-    }
-}
-
-@mixin before($content:'', $display:block, $position:absolute){
-
-    &::before{
-        content: $content;
-        display: $display;
-        position: $position;
-        @content;
-    }
-}
-
-
-/**
- * ブロックの縦横比をpaddingで保持する
- * @include ratioBox(640, 360)
- */
-@mixin ratioBox($width, $height){
-    display: block;
-    width: 100%;
-    height: 0;
-    padding-top: ($height / $width) * 100%;
-}
-
-
-/**
- * 背景画像
- */
-@mixin bg($img, $size:100% auto, $repeat:no-repeat, $pos:null, $color:null){
-    background-image: url($img);
-    background-size: $size;
-    background-repeat: $repeat;
-
-    @if $position != null{
-        background-position: $pos;
-    }
-    @if $color != null{
-        background-color: $color;
-    }
-}
-
-
-/**
  * position:absolute
+ * @include absolute($top:0, $left:0);
  */
 @mixin absolute($top:null, $right:null, $bottom:null, $left:null){
     position: absolute;
@@ -245,17 +231,61 @@
 }
 
 
-
 /**
- * グラデーション
+ * 擬似要素を作成する
+ * @include after(){ 追加するCSS }
+ * @include after($position:fixed){ 追加するCSS }
  */
-@mixin gradient($deg:90deg, $startColor:rgba(0,0,0,0), $endColor:rgba(0,0,0,1), $startpos:0, $endpos:100%){
-	background: linear-gradient($deg,  $startColor $startpos, $endColor $endpos);
+@mixin after($content:'', $display:block, $position:absolute){
+
+    &::after{
+        content: $content;
+        display: $display;
+        position: $position;
+        @content;
+    }
+}
+
+@mixin before($content:'', $display:block, $position:absolute){
+
+    &::before{
+        content: $content;
+        display: $display;
+        position: $position;
+        @content;
+    }
 }
 
 
 /**
- * テキスト飛ばし
+ * 背景画像を設定する
+ * @include bg($img:/assets/img/bg.jpg, $pos:50% 50%);
+ */
+@mixin bg($img, $size:100% auto, $repeat:no-repeat, $pos:null, $color:null){
+    background-image: url($img);
+    background-size: $size;
+    background-repeat: $repeat;
+
+    @if $position != null{
+        background-position: $pos;
+    }
+    @if $color != null{
+        background-color: $color;
+    }
+}
+
+
+/**
+ * 背景にグラデーションを設定する
+ */
+@mixin gradient($deg:90deg, $startColor:rgba(0,0,0,0), $endColor:rgba(0,0,0,1), $startpos:0, $endpos:100%){
+    background: linear-gradient($deg,  $startColor $startpos, $endColor $endpos);
+}
+
+
+/**
+ * テキストを飛ばす
+ * @include ir;
  */
 @mixin ir(){
     text-indent: 100%;
@@ -266,8 +296,8 @@
 
 
 
-/*----------------------------------------------------------------------*/
-/* Animation */
+/*-------------------------------------------------------------------*/
+/* [Animation Mixin] */
 
 /**
  * ロールオーバーでopacity
