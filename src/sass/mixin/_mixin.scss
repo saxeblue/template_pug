@@ -135,6 +135,37 @@
 
 
 
+/**
+ * 指定したviewport間で、Calcを使用し可変フォントを設定する
+ * 参考サイト: http://neos21.hatenablog.com/entry/2017/12/29/080000
+ * 
+ * @include calcFont(14, 24);
+ * @include calcFont($minFontSize:14, $maxFontSize:24, $maxViewPort:1280);
+ */
+@mixin calcFont($minFontSize, $maxFontSize, $minViewPort:480, $maxViewPort:768, $lh:null, $fw:null){
+    $xx: $minViewPort / 100;
+    $yy: 100 * ($maxFontSize - $minFontSize) / ($maxViewPort - $minViewPort);
+    
+    font-size: #{$minFontSize}px;
+    
+    @media screen and (min-width:#{$minViewPort}px){
+        font-size: calc(1rem + ((1vw - #{$xx}px) * #{$yy}));
+    }
+
+    @media screen and (min-width:#{$maxViewPort+1}px){
+        font-size: #{$maxFontSize}px;
+    }
+
+    @if $lh != null{
+        line-height: $lh;
+    }
+    @if $fw != null{
+        font-weight: $fw;
+    }
+}
+
+
+
 
 
 /*-------------------------------------------------------------------*/
