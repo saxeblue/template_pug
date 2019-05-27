@@ -96,7 +96,7 @@ ios10〜
 ```
 yarn start
 ```
-yarn bs & yarn watch:ts & yarn watch:sass & yarn watch:html
+yarn bs & yarn watch:ts & yarn watch:sass & yarn develop:pug & yarn watch:html
 
 
 
@@ -105,7 +105,7 @@ yarn bs & yarn watch:ts & yarn watch:sass & yarn watch:html
 ```
 yarn build
 ```
-yarn product:ts && yarn product:sass
+yarn product:ts && yarn product:sass && yarn product:pug
 
 
 
@@ -140,6 +140,20 @@ yarn start および yarn build で自動的に実行されす。
 ```
 [entry] src/ts  
 [output] htdocs/assets/js
+
+
+
+### ▪︎ pug コンパイル
+pugのコンパイル。  
+yarn start および yarn build で自動的に実行されす。  
+**直接コマンドをたたく必要はありません**
+
+```
+[development] yarn develop:pug  
+[production] yarn product:pug
+```
+[entry] src/pug  
+[output] htdocs
 
 
 
