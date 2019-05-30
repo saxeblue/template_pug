@@ -111,19 +111,24 @@
  * VWでfont-sizeを設定する
  * 参考: https://css-tricks.com/snippets/sass/viewport-sized-typography-minimum-maximum-sizes/
  *
+ * @include vwFont(24);
  * @include vwFont(24, 14);
- * @include vwFont($px:24, $minpx:14, $fw:bold);
+ * @include vwFont(24, 14, bold);
+ * @include vwFont($px:24, $fw:bold);
  */
-@mixin vwFont($px, $minpx, $viewport:750, $lh:null, $fw:null){
+@mixin vwFont($px, $minpx:null, $viewport:750, $lh:null, $fw:null){
     $vw: PxToVw($px, $viewport);
-    $vw-unitless: $vw / ($vw - $vw + 1);
-    $min-breakpoint: $minpx / $vw-unitless * 100;
     
     font-size: $vw;
+    
+    @if $minpx != null{
+        $vw-unitless: $vw / ($vw - $vw + 1);
+        $breakpoint: $minpx / $vw-unitless * 100;
 
-    @media (max-width: #{$min-breakpoint}px){
-        font-size: #{$minpx}px;
-    } 
+        @media (max-width: #{$breakpoint}px){
+            font-size: #{$minpx}px;
+        }
+    }
 
     @if $lh != null{
         line-height: $lh;
