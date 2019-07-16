@@ -13,5 +13,6 @@ module.exports = {
     },
     files: './htdocs/**/*',
     tunnel: false,
-    notify: false
+    notify: false,
+    online: true
 };
