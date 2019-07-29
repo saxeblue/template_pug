@@ -1,1 +1,217 @@
-!function(e){function t(t){for(var o,u,s=t[0],c=t[1],a=t[2],p=0,d=[];p<s.length;p++)u=s[p],i[u]&&d.push(i[u][0]),i[u]=0;for(o in c)Object.prototype.hasOwnProperty.call(c,o)&&(e[o]=c[o]);for(f&&f(t);d.length;)d.shift()();return r.push.apply(r,a||[]),n()}function n(){for(var e,t=0;t<r.length;t++){for(var n=r[t],o=!0,s=1;s<n.length;s++){var c=n[s];0!==i[c]&&(o=!1)}o&&(r.splice(t--,1),e=u(u.s=n[0]))}return e}var o={},i={0:0},r=[];function u(t){if(o[t])return o[t].exports;var n=o[t]={i:t,l:!1,exports:{}};return e[t].call(n.exports,n,n.exports,u),n.l=!0,n.exports}u.m=e,u.c=o,u.d=function(e,t,n){u.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},u.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},u.t=function(e,t){if(1&t&&(e=u(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(u.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)u.d(n,o,function(t){return e[t]}.bind(null,o));return n},u.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return u.d(t,"a",t),t},u.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},u.p="";var s=window.webpackJsonp=window.webpackJsonp||[],c=s.push.bind(s);s.push=t,s=s.slice();for(var a=0;a<s.length;a++)t(s[a]);var f=c;r.push([0,1]),n()}([function(e,t,n){"use strict";n.r(t);var o=n(2),i=function(){function e(){this._subject=new o.a(null),this._source=this._subject.asObservable()}return e.prototype.next=function(e){this._subject.next(e)},Object.defineProperty(e.prototype,"source",{get:function(){return this._source},enumerable:!0,configurable:!0}),e}(),r=new i,u=new i,s=new i,c=function(){function e(){this.init()}return e.prototype.init=function(){r.source.subscribe(function(e){}),u.source.subscribe(function(e){}),s.source.subscribe(function(e){})},e}();new(function(){function e(){this.BREAK_POINT_PC="only screen and (min-width: 769px)",this.setEvent(),this.createPage()}return e.prototype.createPage=function(){"index"==(document.body||document.documentElement).getAttribute("id")&&(this.page=new c)},e.prototype.setEvent=function(){this.onResize(),window.addEventListener("resize",this.onResize.bind(this)),this.onScroll(),window.addEventListener("scroll",this.onScroll.bind(this)),window.matchMedia&&(this.onResponsive(),window.matchMedia(this.BREAK_POINT_PC).addListener(this.onResponsive.bind(this)))},e.prototype.onResize=function(){var e={width:window.innerWidth,height:window.innerHeight};r.next(e)},e.prototype.onScroll=function(){var e={x:window.pageXOffset,y:window.pageYOffset};u.next(e)},e.prototype.onResponsive=function(){if(window.matchMedia(this.BREAK_POINT_PC).matches){var e={bp:"pc"};s.next(e)}else{e={bp:"mobile"};s.next(e)}},e}());window.addEventListener("unload",function(){})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/ 		return result;
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"app": 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push(["./src/ts/app.ts","vendor"]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/ts/app.ts":
+/*!***********************!*\
+  !*** ./src/ts/app.ts ***!
+  \***********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _display__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display */ \"./src/ts/display/index.ts\");\n\nvar stage = new _display__WEBPACK_IMPORTED_MODULE_0__[\"Stage\"]();\nwindow.addEventListener('unload', function () { });\n\n\n//# sourceURL=webpack:///./src/ts/app.ts?");
+
+/***/ }),
+
+/***/ "./src/ts/display/front/index.ts":
+/*!***************************************!*\
+  !*** ./src/ts/display/front/index.ts ***!
+  \***************************************/
+/*! exports provided: FrontPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FrontPage\", function() { return FrontPage; });\n/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../events */ \"./src/ts/events/index.ts\");\n\nvar FrontPage = (function () {\n    function FrontPage() {\n        this.init();\n    }\n    FrontPage.prototype.init = function () {\n        _events__WEBPACK_IMPORTED_MODULE_0__[\"rxResize\"].source.subscribe(function (data) {\n            console.log(data);\n        });\n        _events__WEBPACK_IMPORTED_MODULE_0__[\"rxScroll\"].source.subscribe(function (data) {\n            console.log(data);\n        });\n        _events__WEBPACK_IMPORTED_MODULE_0__[\"rxBreakpoint\"].source.subscribe(function (data) {\n            console.log(data);\n        });\n    };\n    return FrontPage;\n}());\n\n\n\n//# sourceURL=webpack:///./src/ts/display/front/index.ts?");
+
+/***/ }),
+
+/***/ "./src/ts/display/index.ts":
+/*!*********************************!*\
+  !*** ./src/ts/display/index.ts ***!
+  \*********************************/
+/*! exports provided: Stage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Stage\", function() { return Stage; });\n/* harmony import */ var _front__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./front */ \"./src/ts/display/front/index.ts\");\n/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../events */ \"./src/ts/events/index.ts\");\n\n\nvar Stage = (function () {\n    function Stage() {\n        this.BREAK_POINT_PC = 'only screen and (min-width: 769px)';\n        this.setEvent();\n        this.createPage();\n    }\n    Stage.prototype.createPage = function () {\n        var $body = document.body || document.documentElement;\n        var pageID = $body.getAttribute('id');\n        if (pageID == 'index')\n            this.page = new _front__WEBPACK_IMPORTED_MODULE_0__[\"FrontPage\"]();\n    };\n    Stage.prototype.setEvent = function () {\n        this.onResize();\n        window.addEventListener('resize', this.onResize.bind(this));\n        this.onScroll();\n        window.addEventListener('scroll', this.onScroll.bind(this));\n        if (window.matchMedia) {\n            this.onResponsive();\n            window.matchMedia(this.BREAK_POINT_PC).addListener(this.onResponsive.bind(this));\n        }\n    };\n    Stage.prototype.onResize = function () {\n        var datas = { width: window.innerWidth, height: window.innerHeight };\n        _events__WEBPACK_IMPORTED_MODULE_1__[\"rxResize\"].next(datas);\n    };\n    Stage.prototype.onScroll = function () {\n        var datas = { x: window.pageXOffset, y: window.pageYOffset };\n        _events__WEBPACK_IMPORTED_MODULE_1__[\"rxScroll\"].next(datas);\n    };\n    Stage.prototype.onResponsive = function () {\n        if (window.matchMedia(this.BREAK_POINT_PC).matches) {\n            var datas = { bp: 'pc' };\n            _events__WEBPACK_IMPORTED_MODULE_1__[\"rxBreakpoint\"].next(datas);\n        }\n        else {\n            var datas = { bp: 'mobile' };\n            _events__WEBPACK_IMPORTED_MODULE_1__[\"rxBreakpoint\"].next(datas);\n        }\n    };\n    return Stage;\n}());\n\n\n\n//# sourceURL=webpack:///./src/ts/display/index.ts?");
+
+/***/ }),
+
+/***/ "./src/ts/events/RxEvent.ts":
+/*!**********************************!*\
+  !*** ./src/ts/events/RxEvent.ts ***!
+  \**********************************/
+/*! exports provided: RxEvent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"RxEvent\", function() { return RxEvent; });\n/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ \"./node_modules/rxjs/_esm5/index.js\");\n\nvar RxEvent = (function () {\n    function RxEvent() {\n        this._subject = new rxjs__WEBPACK_IMPORTED_MODULE_0__[\"BehaviorSubject\"](null);\n        this._source = this._subject.asObservable();\n    }\n    RxEvent.prototype.next = function (datas) {\n        this._subject.next(datas);\n    };\n    Object.defineProperty(RxEvent.prototype, \"source\", {\n        get: function () {\n            return this._source;\n        },\n        enumerable: true,\n        configurable: true\n    });\n    return RxEvent;\n}());\n\n\n\n//# sourceURL=webpack:///./src/ts/events/RxEvent.ts?");
+
+/***/ }),
+
+/***/ "./src/ts/events/index.ts":
+/*!********************************!*\
+  !*** ./src/ts/events/index.ts ***!
+  \********************************/
+/*! exports provided: rxResize, rxScroll, rxBreakpoint */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"rxResize\", function() { return rxResize; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"rxScroll\", function() { return rxScroll; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"rxBreakpoint\", function() { return rxBreakpoint; });\n/* harmony import */ var _RxEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RxEvent */ \"./src/ts/events/RxEvent.ts\");\n\nvar rxResize = new _RxEvent__WEBPACK_IMPORTED_MODULE_0__[\"RxEvent\"]();\nvar rxScroll = new _RxEvent__WEBPACK_IMPORTED_MODULE_0__[\"RxEvent\"]();\nvar rxBreakpoint = new _RxEvent__WEBPACK_IMPORTED_MODULE_0__[\"RxEvent\"]();\n\n\n//# sourceURL=webpack:///./src/ts/events/index.ts?");
+
+/***/ })
+
+/******/ });
