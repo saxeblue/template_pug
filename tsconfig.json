@@ -8,7 +8,10 @@
         "emitDecoratorMetadata": true,
         "removeComments": true,
         "noEmitOnError": false,
-        "lib": ["es2018", "dom"]
+        "lib": ["es2018", "dom"],
+        "typeRoots": [
+            "src/ts/typings/magnific-popup"
+        ]
     },
     "include": [
         "src/**/*.ts"
