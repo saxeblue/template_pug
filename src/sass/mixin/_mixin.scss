@@ -70,7 +70,8 @@
  * width: getPer(800, 1200);
  */
 @function getPer($bunshi, $bunbo){
-    @return ($bunshi / $bunbo) * 100%;
+    $per: floor(percentage($bunshi/$bunbo)*10) / 10;
+    @return $per;
 }
 
 
