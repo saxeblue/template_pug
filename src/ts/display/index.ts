@@ -27,6 +27,7 @@ export class Stage{
 	constructor(){
 		this.setEvent();
 		this.createPage();
+		this.setSmoothScroll();
 	}
 
 
@@ -79,6 +80,24 @@ export class Stage{
         	const datas:RxBreakpoint_Data = {bp:'mobile'};
         	rxBreakpoint.next(datas);
         }
+	}
+
+
+	/**
+	 * smooth scroll
+	 */
+	private setSmoothScroll():void{
+		const links:NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a.smooth');
+
+		for(let i:number=0; i<links.length; i++){
+			const $a:HTMLAnchorElement = links[i];
+			$a.addEventListener('click', (e:Event)=>{
+				e.preventDefault();
+				const $target:HTMLElement = document.querySelector($a.getAttribute('href'));
+				const targetPos:number = Selector.getAbsoluteTop($target);
+				TweenMax.to([document.querySelector("html"),document.querySelector("body")], 0.7, {scrollTop:targetPos, ease:Power2.easeOut});
+			});
+		}
 	}
 }
 
