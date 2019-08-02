@@ -15,9 +15,9 @@
  * 
  */
 @mixin mq($breakpoint){
-    @media #{$breakpoint}{
-        @content;
-    }
+  @media #{$breakpoint}{
+    @content;
+  }
 }
 
 
@@ -35,11 +35,11 @@
  */
 @mixin be($names...){
 
-    @each $name in $names{
-        &__#{$name}{
-            @content;
-        }
+  @each $name in $names{
+    &__#{$name}{
+      @content;
     }
+  }
 }
 
 
@@ -51,11 +51,11 @@
  */
 @mixin bm($names...){
 
-    @each $name in $names{
-        &--#{$name} {
-            @content;
-        }
+  @each $name in $names{
+    &--#{$name} {
+      @content;
     }
+  }
 }
 
 
@@ -70,8 +70,8 @@
  * width: getPer(800, 1200);
  */
 @function getPer($bunshi, $bunbo){
-    $per: floor(percentage($bunshi/$bunbo)*10) / 10;
-    @return $per;
+  $per: floor(percentage($bunshi/$bunbo)*10) / 10;
+  @return $per;
 }
 
 
@@ -79,8 +79,8 @@
  * pxをvwに変換
  */
 @function PxToVw($size, $viewport){
-    $rate: 100 / $viewport;
-    @return $rate * $size * 1vw;
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
 }
 
 
@@ -96,15 +96,15 @@
  * @include remFont($size:16, $fw:bold);
  */
 @mixin remFont($size, $lh:null, $fw:null){
-    font-size: #{$size}px;
-    font-size: ($size / 16) * 1rem;
+  font-size: #{$size}px;
+  font-size: ($size / 16) * 1rem;
 
-    @if $lh != null{
-        line-height: $lh;
-    }
-    @if $fw != null{
-        font-weight: $fw;
-    }
+  @if $lh != null{
+    line-height: $lh;
+  }
+  @if $fw != null{
+    font-weight: $fw;
+  }
 }
 
 
@@ -118,25 +118,25 @@
  * @include vwFont($px:24, $fw:bold);
  */
 @mixin vwFont($px, $minpx:null, $viewport:750, $lh:null, $fw:null){
-    $vw: PxToVw($px, $viewport);
-    
-    font-size: $vw;
-    
-    @if $minpx != null{
-        $vw-unitless: $vw / ($vw - $vw + 1);
-        $breakpoint: $minpx / $vw-unitless * 100;
+  $vw: PxToVw($px, $viewport);
+  
+  font-size: $vw;
+  
+  @if $minpx != null{
+    $vw-unitless: $vw / ($vw - $vw + 1);
+    $breakpoint: $minpx / $vw-unitless * 100;
 
-        @media (max-width: #{$breakpoint}px){
-            font-size: #{$minpx}px;
-        }
+    @media (max-width: #{$breakpoint}px){
+      font-size: #{$minpx}px;
     }
+  }
 
-    @if $lh != null{
-        line-height: $lh;
-    }
-    @if $fw != null{
-        font-weight: $fw;
-    }
+  @if $lh != null{
+    line-height: $lh;
+  }
+  @if $fw != null{
+    font-weight: $fw;
+  }
 }
 
 
@@ -149,25 +149,25 @@
  * @include calcFont($minFontSize:14, $maxFontSize:24, $maxViewPort:1280);
  */
 @mixin calcFont($minFontSize, $maxFontSize, $minViewPort:480, $maxViewPort:768, $lh:null, $fw:null){
-    $xx: $minViewPort / 100;
-    $yy: 100 * ($maxFontSize - $minFontSize) / ($maxViewPort - $minViewPort);
-    
-    font-size: #{$minFontSize}px;
-    
-    @media screen and (min-width:#{$minViewPort}px){
-        font-size: calc(1rem + ((1vw - #{$xx}px) * #{$yy}));
-    }
+  $xx: $minViewPort / 100;
+  $yy: 100 * ($maxFontSize - $minFontSize) / ($maxViewPort - $minViewPort);
+  
+  font-size: #{$minFontSize}px;
+  
+  @media screen and (min-width:#{$minViewPort}px){
+    font-size: calc(1rem + ((1vw - #{$xx}px) * #{$yy}));
+  }
 
-    @media screen and (min-width:#{$maxViewPort+1}px){
-        font-size: #{$maxFontSize}px;
-    }
+  @media screen and (min-width:#{$maxViewPort+1}px){
+    font-size: #{$maxFontSize}px;
+  }
 
-    @if $lh != null{
-        line-height: $lh;
-    }
-    @if $fw != null{
-        font-weight: $fw;
-    }
+  @if $lh != null{
+    line-height: $lh;
+  }
+  @if $fw != null{
+    font-weight: $fw;
+  }
 }
 
 
@@ -182,10 +182,10 @@
  * @include ratioBox(640, 360)
  */
 @mixin ratioBox($width, $height){
-    display: block;
-    width: 100%;
-    height: 0;
-    padding-top: getPer($height, $width);
+  display: block;
+  width: 100%;
+  height: 0;
+  padding-top: getPer($height, $width);
 }
 
 
@@ -194,13 +194,13 @@
  * @include ibLine;
  */
 @mixin ibLine($horizon:left){
-    letter-spacing: -0.4em;
-    text-align: $horizon;
+  letter-spacing: -0.4em;
+  text-align: $horizon;
 
-    & > *{
-        display: inline-block;
-        letter-spacing: normal;
-    }
+  & > *{
+    display: inline-block;
+    letter-spacing: normal;
+  }
 }
 
 
@@ -210,9 +210,9 @@
  * justify-content: https://developer.mozilla.org/ja/docs/Web/CSS/justify-content
  */
 @mixin fxLine($horizon:left){
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $horizon;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: $horizon;
 }
 
 
@@ -221,9 +221,9 @@
  * @include fxCenter;
  */
 @mixin fxCenter(){
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -232,20 +232,20 @@
  * @include absolute($top:0, $left:0);
  */
 @mixin absolute($top:null, $right:null, $bottom:null, $left:null){
-    position: absolute;
+  position: absolute;
 
-    @if $top != null{
-        top: $top;
-    }
-    @if $right != null{
-        right: $right;
-    }
-    @if $bottom != null{
-        bottom: $bottom;
-    }
-    @if $left != null{
-        left: $left;
-    }
+  @if $top != null{
+    top: $top;
+  }
+  @if $right != null{
+    right: $right;
+  }
+  @if $bottom != null{
+    bottom: $bottom;
+  }
+  @if $left != null{
+    left: $left;
+  }
 }
 
 
@@ -253,20 +253,20 @@
  * position:fixed
  */
 @mixin fixed($top:null, $right:null, $bottom:null, $left:null){
-    position: fixed;
+  position: fixed;
 
-    @if $top != null{
-        top: $top;
-    }
-    @if $right != null{
-        right: $right;
-    }
-    @if $bottom != null{
-        bottom: $bottom;
-    }
-    @if $left != null{
-        left: $left;
-    }
+  @if $top != null{
+    top: $top;
+  }
+  @if $right != null{
+    right: $right;
+  }
+  @if $bottom != null{
+    bottom: $bottom;
+  }
+  @if $left != null{
+    left: $left;
+  }
 }
 
 
@@ -277,22 +277,22 @@
  */
 @mixin after($content:'', $display:block, $position:absolute){
 
-    &::after{
-        content: $content;
-        display: $display;
-        position: $position;
-        @content;
-    }
+  &::after{
+    content: $content;
+    display: $display;
+    position: $position;
+    @content;
+  }
 }
 
 @mixin before($content:'', $display:block, $position:absolute){
 
-    &::before{
-        content: $content;
-        display: $display;
-        position: $position;
-        @content;
-    }
+  &::before{
+    content: $content;
+    display: $display;
+    position: $position;
+    @content;
+  }
 }
 
 
@@ -301,16 +301,16 @@
  * @include bg($img:/assets/img/bg.jpg, $pos:50% 50%);
  */
 @mixin bg($img, $size:100% auto, $repeat:no-repeat, $pos:null, $color:null){
-    background-image: url($img);
-    background-size: $size;
-    background-repeat: $repeat;
+  background-image: url($img);
+  background-size: $size;
+  background-repeat: $repeat;
 
-    @if $position != null{
-        background-position: $pos;
-    }
-    @if $color != null{
-        background-color: $color;
-    }
+  @if $position != null{
+    background-position: $pos;
+  }
+  @if $color != null{
+    background-color: $color;
+  }
 }
 
 
@@ -318,7 +318,7 @@
  * 背景にグラデーションを設定する
  */
 @mixin gradient($deg:90deg, $startColor:rgba(0,0,0,0), $endColor:rgba(0,0,0,1), $startpos:0, $endpos:100%){
-    background: linear-gradient($deg,  $startColor $startpos, $endColor $endpos);
+  background: linear-gradient($deg,  $startColor $startpos, $endColor $endpos);
 }
 
 
@@ -327,9 +327,9 @@
  * @include ir;
  */
 @mixin ir(){
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 
@@ -342,11 +342,11 @@
  * ロールオーバーでopacity
  */
 @mixin HoverOpacity($opacity:0.8, $duration:0.3s, $easing:$EaseOut_Quart){
-    transition: all $duration $easing;
+  transition: all $duration $easing;
 
-    &:hover{
-        opacity: $opacity;
-    }
+  &:hover{
+    opacity: $opacity;
+  }
 }
 
 
@@ -354,29 +354,29 @@
  * ロールオーバーで下線が伸びる
  */
 @mixin HoverLine($txtHoverColor:#FF0000, $lineHoverColor:#FF0000, $duration:0.3s, $easing:$EaseOut_Quart){
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    transition: all $duration $easing;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: all $duration $easing;
 
+
+  &::after{
+    content: '';
+    display: block;
+    width:0; height: 1px;
+    opacity: 0;
+    background-color: $lineHoverColor;
+    transition: all $duration $easing;
+  }
+
+  &:hover{
+    color: $txtHoverColor;
 
     &::after{
-        content: '';
-        display: block;
-        width:0; height: 1px;
-        opacity: 0;
-        background-color: $lineHoverColor;
-        transition: all $duration $easing;
+      width:100%;
+      opacity: 1;
     }
-
-    &:hover{
-        color: $txtHoverColor;
-
-        &::after{
-            width:100%;
-            opacity: 1;
-        }
-    }
+  }
 }
 
 
@@ -384,11 +384,11 @@
  * ロールオーバーでドロップシャドウ
  */
 @mixin HoverDropshadow($x:0, $y:-2px, $radius:8px, $color:rgba(0, 166, 233, 0.4), $duration:0.4s, $easing:$EaseOut_Quart){
-    transition: all $duration $easing;
+  transition: all $duration $easing;
 
-    &:hover{
-        filter: drop-shadow($x $y $radius $color);
-    }
+  &:hover{
+    filter: drop-shadow($x $y $radius $color);
+  }
 }
 
 
@@ -398,61 +398,61 @@
  * <div>は、width指定もしくはdisplay:inline-block
  */
 @mixin HoverSqBorderExtend($borderColor:#000, $borderThick:1px, $duration:0.3s, $easing:$EaseOut_Quart){
+  position: relative;
+  
+  img{
+      display: block;
+  }
+  
+  a{
     position: relative;
+    display: inline-block;
     
-    img{
-        display: block;
+    &::before, &::after, span::before, span::after{
+      content: '';
+      display: block;
+      position: absolute;
+      background: $borderColor;
+      pointer-events: none;
+      transition: all $duration $easing;
     }
-    
-    a{
-        position: relative;
-        display: inline-block;
-        
-        &::before, &::after, span::before, span::after{
-            content: '';
-            display: block;
-            position: absolute;
-            background: $borderColor;
-            pointer-events: none;
-            transition: all $duration $easing;
-        }
 
-        &::before{
-            left:0; bottom:0;
-            width: $borderThick; height: 0;
-            z-index: 1;
-        }
-
-        &::after{
-            left:0; top:0;
-            width: 0; height: $borderThick;
-        }
-        
-        span{
-            position: relative;
-            display: inline-block;
-            
-            &::before{
-                right:0; top:0;
-                width: $borderThick; height: 0;
-                z-index: 2;
-            }
-            &::after{
-                right:0; bottom:0;
-                width: 0; height: $borderThick;
-            }
-        }
-        
-        &:hover{
-
-            &::before, span::before{
-            	height: 100%;
-            }
-            &::after, span::after{
-            	width: 100%;
-            }
-        }
+    &::before{
+      left:0; bottom:0;
+      width: $borderThick; height: 0;
+      z-index: 1;
     }
+
+    &::after{
+      left:0; top:0;
+      width: 0; height: $borderThick;
+    }
+      
+    span{
+      position: relative;
+      display: inline-block;
+        
+      &::before{
+        right:0; top:0;
+        width: $borderThick; height: 0;
+        z-index: 2;
+      }
+      &::after{
+        right:0; bottom:0;
+        width: 0; height: $borderThick;
+      }
+    }
+      
+    &:hover{
+
+      &::before, span::before{
+      	height: 100%;
+      }
+      &::after, span::after{
+      	width: 100%;
+      }
+    }
+  }
 }
 
 
@@ -463,26 +463,26 @@
  */
 @mixin HoverSqBorderThick($borderColor:#000, $borderHoverThick:3px, $duration:0.3s, $easing:$EaseOut_Quart){
     
-    a{
-        position: relative;
-        display: inline-block;
-        
-        &::after{
-            content: '';
-            display: block;
-            width: 100%; height: 100%;
-            box-sizing: border-box;
-            position: absolute;
-            left:0; top:0;
-            border:0 solid $borderColor;
-            z-index: 2;
-            transition: all $duration $EaseOut_Quart;
-        }
-        
-        &:hover::after{
-            border:$borderHoverThick solid $borderColor;
-        }
+  a{
+    position: relative;
+    display: inline-block;
+    
+    &::after{
+      content: '';
+      display: block;
+      width: 100%; height: 100%;
+      box-sizing: border-box;
+      position: absolute;
+      left:0; top:0;
+      border:0 solid $borderColor;
+      z-index: 2;
+      transition: all $duration $EaseOut_Quart;
     }
+    
+    &:hover::after{
+      border:$borderHoverThick solid $borderColor;
+    }
+  }
 }
 
 
@@ -491,33 +491,33 @@
  */
 @mixin HoverMarker($hoverColor, $markerColor, $duration:0.5s, $easing:$EaseOut_Quart){
     
-    a{
-        position: relative;
-        display: inline-block;
-        padding: 3px;
-        text-decoration: none;
-        transition: all $duration $easing;
+  a{
+    position: relative;
+    display: inline-block;
+    padding: 3px;
+    text-decoration: none;
+    transition: all $duration $easing;
+      
+      &::before{
+        content: '';
+        display: block;
+        width:0; height: 100%;
+        position: absolute;
+        top:0;
+        z-index: -1;
+        opacity: 0;
+        background-color: $markerColor;
+        transition: all $duration $easing;  
+      }
+      
+      &:hover{
+        color:$hoverColor;
         
         &::before{
-            content: '';
-            display: block;
-            width:0; height: 100%;
-            position: absolute;
-            top:0;
-            z-index: -1;
-            opacity: 0;
-            background-color: $markerColor;
-            transition: all $duration $easing;  
+          width:100%;
+          opacity: 1;
         }
-        
-        &:hover{
-            color:$hoverColor;
-            
-            &::before{
-                width:100%;
-                opacity: 1;
-            }
-        }
+      }
     }
 }
 
@@ -537,27 +537,27 @@
 	0% {
 		transform: rotate(1.2deg);
 	}
-    20% {
-    	transform: rotate(-0.8deg);
-    }
-    40% {
-    	transform: rotate(0.4deg);
-    }
-    60% {
-    	transform: rotate(-0.75deg);
-    }
-    70% {
-    	transform: rotate(0.375deg);
-    }
-    80% {
-    	transform: rotate(-0.25deg);
-    }
-    90% {
-    	transform: rotate(0.125deg);
-    }
-    100% {
-    	transform: rotate(0);
-    }
+  20% {
+  	transform: rotate(-0.8deg);
+  }
+  40% {
+  	transform: rotate(0.4deg);
+  }
+  60% {
+  	transform: rotate(-0.75deg);
+  }
+  70% {
+  	transform: rotate(0.375deg);
+  }
+  80% {
+  	transform: rotate(-0.25deg);
+  }
+  90% {
+  	transform: rotate(0.125deg);
+  }
+  100% {
+  	transform: rotate(0);
+  }
 }
 
 @mixin HoverShakeHard($duration:0.5s, $easing:linear){
@@ -572,27 +572,27 @@
 	0% {
 		transform: rotate(2.4deg);
 	}
-    20% {
-    	transform: rotate(-1.6deg);
-    }
-    40% {
-    	transform: rotate(0.8deg);
-    }
-    60% {
-    	transform: rotate(-1.5deg);
-    }
-    70% {
-    	transform: rotate(0.7deg);
-    }
-    80% {
-    	transform: rotate(-0.5deg);
-    }
-    90% {
-    	transform: rotate(0.25deg);
-    }
-    100% {
-    	transform: rotate(0);
-    }
+  20% {
+  	transform: rotate(-1.6deg);
+  }
+  40% {
+  	transform: rotate(0.8deg);
+  }
+  60% {
+  	transform: rotate(-1.5deg);
+  }
+  70% {
+  	transform: rotate(0.7deg);
+  }
+  80% {
+  	transform: rotate(-0.5deg);
+  }
+  90% {
+  	transform: rotate(0.25deg);
+  }
+  100% {
+  	transform: rotate(0);
+  }
 }
 
 
@@ -600,24 +600,24 @@
  * スノーノイズ
  */
 @mixin snowNoise($noiseUrl, $opacity:0.2, $duration:0.5s){
-    width: 100%;
-    height: 100%;
-    background: url($noiseUrl);
-    opacity: $opacity;
-    animation: snowNoiseFrame $duration infinite linear;
+  width: 100%;
+  height: 100%;
+  background: url($noiseUrl);
+  opacity: $opacity;
+  animation: snowNoiseFrame $duration infinite linear;
 }
 @keyframes snowNoiseFrame{
-    0%{
-        background-position:50px 0;
-    }
-    40%{
-        background-position: 10px 50%;
-    }
-    80%{
-        background-position:300px 100%;
-    }
-    100%{
-        background-position: 0 0;
-    }
+  0%{
+      background-position:50px 0;
+  }
+  40%{
+      background-position: 10px 50%;
+  }
+  80%{
+      background-position:300px 100%;
+  }
+  100%{
+      background-position: 0 0;
+  }
 }
 
