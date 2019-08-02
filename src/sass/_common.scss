@@ -6,34 +6,25 @@
 /* [BASE SETTING] */
 
 html{
-    background: transparent;
-    line-height: $font-baseLine;
+  background: transparent;
+  line-height: $font-baseLine;
 }
-
 
 body{
-    font-family: $font-family;
-    color: $font-baseColor;
-    background-color: $body-color;
-    -webkit-text-size-adjust: 100%;
+  font-family: $font-family;
+  color: $font-baseColor;
+  background-color: $body-color;
+  -webkit-text-size-adjust: 100%;
 }
-
 
 img{
 	width: 100%;
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
-
 
 a, a img{
-    outline: none;
+  outline: none;
 }
-
 
 ::selection{
-
 }
-
-
-
-
