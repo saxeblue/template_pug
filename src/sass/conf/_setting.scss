@@ -22,9 +22,10 @@ $pc: 'screen and (min-width: 769px)';
 $body-color:#FFF;
 
 /**
- * max-widthのサイズ
+ * サイズ一覧
  */
-$max-width: 1280px;
+$pc-viewport: 1280px;
+$sp-viewport: 750px;
  
 /**
  * フォントファミリー
