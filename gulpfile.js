@@ -38,7 +38,7 @@ var argv = minimist(process.argv.slice(2));
  * [ エラー通知 ] 
  */
 function plumberWithNotify(){
-    return plumber({errorHandler: notify.onError("<%= error.message %>")});
+  return plumber({errorHandler: notify.onError("<%= error.message %>")});
 };
 
 
@@ -54,17 +54,17 @@ function plumberWithNotify(){
  * gulp kySass --env production
  */
 gulp.task('kySass', function(){
-    const glob = APP_PATHS.src.sass + '/**/*.scss';
-    const destDir = APP_PATHS.dest.css;
-    const processors = [autoprefixer({browsers: appConfig.CSS_TARGET}), cssmqpacker];
-    const isProduction = (argv['env']=='production') ? true : false;
+  var glob = APP_PATHS.src.sass + '/**/*.scss';
+  var destDir = APP_PATHS.dest.css;
+  var processors = [autoprefixer({browsers: appConfig.CSS_TARGET}), cssmqpacker];
+  var isProduction = (argv['env']=='production') ? true : false;
 
-    return gulp.src(glob)
-        .pipe(plumberWithNotify())
-        .pipe(gulpsass())
-        .pipe(postcss(processors))
-        .pipe(gulpif(isProduction, minifycss()))
-        .pipe(gulp.dest(destDir));
+  return gulp.src(glob)
+    .pipe(plumberWithNotify())
+    .pipe(gulpsass())
+    .pipe(postcss(processors))
+    .pipe(gulpif(isProduction, minifycss()))
+    .pipe(gulp.dest(destDir));
 });
 
 
@@ -76,57 +76,57 @@ gulp.task('kySass', function(){
  * brew install automake autoconf libtool dpkg pkgconfig nasm libpng
  */
 gulp.task('kyImagemin-gif', function(){
-    const glob = APP_PATHS.src.img + '/**/*.gif';
-    const destDir = APP_PATHS.dest.img;
-    
-    return gulp.src(glob)
-        .pipe(chached(glob))
-        .pipe(plumberWithNotify())
-        .pipe(imagemin([
-            gifsicle({interlaced:true})
-        ]))
-        .pipe(gulp.dest(destDir));
+  var glob = APP_PATHS.src.img + '/**/*.gif';
+  var destDir = APP_PATHS.dest.img;
+  
+  return gulp.src(glob)
+    .pipe(chached(glob))
+    .pipe(plumberWithNotify())
+    .pipe(imagemin([
+        gifsicle({interlaced:true})
+    ]))
+    .pipe(gulp.dest(destDir));
 });
 gulp.task('kyImagemin-jpg', function(){
-    const glob = APP_PATHS.src.img + '/**/*.{jpg,jpeg}';
-    const destDir = APP_PATHS.dest.img;
-    
-    return gulp.src(glob)
-        .pipe(chached(glob))
-        .pipe(plumberWithNotify())
-        .pipe(imagemin([
-            mozjpeg({quality:GULP_CONFIG.asset.jpg, progressive: true})
-        ]))
-        .pipe(gulp.dest(destDir));
+  var glob = APP_PATHS.src.img + '/**/*.{jpg,jpeg}';
+  var destDir = APP_PATHS.dest.img;
+  
+  return gulp.src(glob)
+    .pipe(chached(glob))
+    .pipe(plumberWithNotify())
+    .pipe(imagemin([
+        mozjpeg({quality:GULP_CONFIG.asset.jpg, progressive: true})
+    ]))
+    .pipe(gulp.dest(destDir));
 });
 gulp.task('kyImagemin-png', function(){
-    const glob = APP_PATHS.src.img + '/**/*.png';
-    const destDir = APP_PATHS.dest.img;
-    
-    return gulp.src(glob)
-        .pipe(chached(glob))
-        .pipe(plumberWithNotify())
-        .pipe(imagemin([
-            pngquant({quality: GULP_CONFIG.asset.png, speed: GULP_CONFIG.asset.png_compress_speed})
-        ]))
-        .pipe(imagemin())   // ガンマ情報を除去
-        .pipe(gulp.dest(destDir));
+  var glob = APP_PATHS.src.img + '/**/*.png';
+  var destDir = APP_PATHS.dest.img;
+  
+  return gulp.src(glob)
+    .pipe(chached(glob))
+    .pipe(plumberWithNotify())
+    .pipe(imagemin([
+        pngquant({quality: GULP_CONFIG.asset.png, speed: GULP_CONFIG.asset.png_compress_speed})
+    ]))
+    .pipe(imagemin())   // ガンマ情報を除去
+    .pipe(gulp.dest(destDir));
 });
 gulp.task('kyImagemin-svgo', function(){
-    const glob = APP_PATHS.src.img + '/**/*.svg';
-    const destDir = APP_PATHS.dest.img;
-    
-    return gulp.src(glob)
-        .pipe(chached(glob))
-        .pipe(plumberWithNotify())
-        .pipe(imagemin([
-            svgo({
-                plugins: [
-                    GULP_CONFIG.asset.svg
-                ]
-            })
-        ]))
-        .pipe(gulp.dest(destDir));
+  var glob = APP_PATHS.src.img + '/**/*.svg';
+  var destDir = APP_PATHS.dest.img;
+  
+  return gulp.src(glob)
+      .pipe(chached(glob))
+      .pipe(plumberWithNotify())
+      .pipe(imagemin([
+        svgo({
+          plugins: [
+            GULP_CONFIG.asset.svg
+          ]
+        })
+      ]))
+      .pipe(gulp.dest(destDir));
 });
 gulp.task('kyImagemin', gulp.parallel('kyImagemin-gif', 'kyImagemin-jpg', 'kyImagemin-png', 'kyImagemin-svgo'));
 
@@ -149,29 +149,29 @@ gulp.task('kyImagemin', gulp.parallel('kyImagemin-gif', 'kyImagemin-jpg', 'kyIma
  * ループする際にはspriteの該当データの第3引数をtrueにする
  */
 gulp.task('kyAudioSprite', function(){
-    const glob = APP_PATHS.src.audio + '/*.mp3';
-    const destDir = APP_PATHS.dest.audio;
-    const config = GULP_CONFIG.asset.audio;
-    const bps = (argv['bitrate'] != undefined) ? argv['bitrate'] : config.bitrate;
+    var glob = APP_PATHS.src.audio + '/*.mp3';
+    var destDir = APP_PATHS.dest.audio;
+    var config = GULP_CONFIG.asset.audio;
+    var bps = (argv['bitrate'] != undefined) ? argv['bitrate'] : config.bitrate;
 
     return gulp.src(glob)
-        .pipe(plumberWithNotify())
-        .pipe(audiosprite({
-            // 出力ファイル名
-            output: 'audio',
-            
-            // ビットレート
-            bitrate: config.bitrate,
-            
-            // JSONの出力タイプ(対応形式： jukebox、howler、createjs)
-            // howlerの場合、'urls'という記述を'src'に変更する必要あり。
-            format: config.format,
+      .pipe(plumberWithNotify())
+      .pipe(audiosprite({
+        // 出力ファイル名
+        output: 'audio',
+        
+        // ビットレート
+        bitrate: config.bitrate,
+        
+        // JSONの出力タイプ(対応形式： jukebox、howler、createjs)
+        // howlerの場合、'urls'という記述を'src'に変更する必要あり。
+        format: config.format,
 
-            // 1: mono, 2: stereo
-            channels: config.channel,
+        // 1: mono, 2: stereo
+        channels: config.channel,
 
-            // JSONに書かれるパス
-            path: './audio'
-        }))
-        .pipe(gulp.dest(destDir));
+        // JSONに書かれるパス
+        path: './audio'
+      }))
+      .pipe(gulp.dest(destDir));
 });
