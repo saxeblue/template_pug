@@ -2,10 +2,12 @@
  * class: AppRoot
  * @classdesc 表示クラスのrootになるclass
  */
+import {TweenMax, Power2} from 'gsap';
 import 'magnific-popup';
 import 'magnific-popup/dist/magnific-popup.css';
 
 import {FrontPage} from './front';
+import {Selector} from '../utils/selector';
 import {rxResize, rxScroll, rxBreakpoint, RxResize_Data, RxScroll_Data, RxBreakpoint_Data} from '../events';
 
 
