@@ -10,6 +10,7 @@ interface JQueryStatic {
 
 interface JQueryMagnificPopupStatic {
   open: any;
+  close: any;
   (): JQuery;
   parameter(name: string): string;
   parameter(name: string, value: string, append?: boolean): JQuery;
