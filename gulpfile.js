@@ -9,7 +9,7 @@ var gulpsass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var cssmqpacker = require('css-mqpacker');
-var minifycss = require('gulp-minify-css');
+var cleancss = require('gulp-clean-css');
 
 var imagemin = require('gulp-imagemin');
 var gifsicle = require('imagemin-gifsicle');
@@ -63,7 +63,7 @@ gulp.task('kySass', function(){
     .pipe(plumberWithNotify())
     .pipe(gulpsass())
     .pipe(postcss(processors))
-    .pipe(gulpif(isProduction, minifycss()))
+    .pipe(gulpif(isProduction, cleancss()))
     .pipe(gulp.dest(destDir));
 });
 
