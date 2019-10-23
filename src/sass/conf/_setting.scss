@@ -14,6 +14,7 @@ $reset-type: html5;
  * BreakPoint
  * @include mq($pc){CSS設定}
  */
+$sp: 'screen and (max-width: 768px)';
 $pc: 'screen and (min-width: 769px)';
 
 /**
