@@ -36,7 +36,7 @@
 @mixin be($names...){
 
   @each $name in $names{
-    &__#{$name}{
+    &_#{$name}{
       @content;
     }
   }
@@ -52,7 +52,7 @@
 @mixin bm($names...){
 
   @each $name in $names{
-    &--#{$name} {
+    &-#{$name} {
       @content;
     }
   }
