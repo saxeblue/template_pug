@@ -15,7 +15,9 @@ $reset-type: html5;
  * @include mq($pc){CSS設定}
  */
 $sp: 'screen and (max-width: 768px)';
-$pc: 'screen and (min-width: 769px)';
+$pcS: 'screen and (min-width: 769px)';
+$pcM: 'screen and (min-width: 961px)';
+$pcL: 'screen and (min-width: 1241px)';
 
 /**
  * body背景色
