@@ -71,7 +71,7 @@
     "postcss": "^7.0.14",
     "postcss-cli": "^6.1.1",
     "postcss-loader": "^3.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-cli": "github:pugjs/pug-cli#master",
     "raw-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
